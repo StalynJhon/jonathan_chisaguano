@@ -15,4 +15,4 @@ def mostrar_primos():
     return f"Números primos del 1 al 20: {primos}"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=7777, debug=True)
