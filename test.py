@@ -17,9 +17,16 @@ class TestApp(unittest.TestCase):
         # Verifica que los números primos esperados estén en la respuesta
         respuesta = self.app.get('/')
         texto = respuesta.get_data(as_text=True)
-        self.assertIn('2', texto)
-        self.assertIn('19', texto)
-        self.assertNotIn('1', texto)  # 1 no es primo
+
+        # Convertimos el string de salida en una lista de enteros
+        # Ej: 'Números primos del 1 al 20: [2, 3, 5, 7, 11, 13, 17, 19]'
+        lista_str = texto.split(':')[1].strip().strip('[]')
+        primos_en_app = [int(n.strip()) for n in lista_str.split(',')]
+
+        # Comprobaciones
+        self.assertIn(2, primos_en_app)
+        self.assertIn(19, primos_en_app)
+        self.assertNotIn(1, primos_en_app)  # 1 no es primo
 
 if __name__ == '__main__':
     unittest.main()
